@@ -7,6 +7,7 @@ import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.graphics.frames.FlxFrame;
 import flixel.group.FlxGroup;
 import flixel.input.gamepad.FlxGamepad;
+import flixel.FlxG;
 import haxe.Json;
 
 import openfl.Assets;
@@ -17,6 +18,8 @@ import shaders.ColorSwap;
 
 import states.StoryMenuState;
 import states.MainMenuState;
+import debug.FPSCounter;
+import backend.ClientPrefs;
 
 typedef TitleData =
 {
@@ -132,7 +135,6 @@ class TitleState extends MusicBeatState
 		logoBl.antialiasing = ClientPrefs.data.antialiasing;
 
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
-		logoBl.animation.play('bump');
 		logoBl.updateHitbox();
 
 		gfDance = new FlxSprite(gfPosition.x, gfPosition.y);
@@ -320,6 +322,8 @@ class TitleState extends MusicBeatState
 	var newTitle:Bool = false;
 	var titleTimer:Float = 0;
 
+	var time:Float = 0;
+
 	override function update(elapsed:Float)
 	{
 		if (FlxG.sound.music != null)
@@ -457,6 +461,12 @@ class TitleState extends MusicBeatState
 			if(controls.UI_RIGHT) swagShader.hue += elapsed * 0.1;
 		}
 
+		if (Math.floor(time % 120) == 0) {
+			logoBl.animation.play('bump');
+		}
+
+		time += 1*(FlxG.updateFramerate/ClientPrefs.data.framerate);
+
 		super.update(elapsed);
 	}
 
@@ -500,9 +510,6 @@ class TitleState extends MusicBeatState
 	override function beatHit()
 	{
 		super.beatHit();
-
-		if(logoBl != null)
-			logoBl.animation.play('bump', true);
 
 		if(gfDance != null)
 		{

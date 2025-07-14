@@ -243,8 +243,12 @@ class DialogueEditorState extends MusicBeatState implements PsychUIEventHandler.
 		if(id == PsychUIInputText.CHANGE_EVENT && (sender is PsychUIInputText)) {
 			if (sender == characterInputText)
 			{
-				character.reloadCharacterJson(characterInputText.text);
-				reloadCharacter();
+				try {
+					character.reloadCharacterJson(characterInputText.text);
+					reloadCharacter();
+				} catch (e:Dynamic) {
+					trace('Caught an error: ' + e + "\nBecause it's in this code block it can be ignored.");
+				}
 				if(character.jsonFile.animations.length > 0) {
 					curAnim = 0;
 					if(character.jsonFile.animations.length > curAnim && character.jsonFile.animations[curAnim] != null) {

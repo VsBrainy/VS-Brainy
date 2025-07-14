@@ -905,6 +905,10 @@ class PlayState extends MusicBeatState
 			endSong();
 		else
 			startCountdown();
+			while (!inCutscene) {
+				trace("WAITING TO FINISH CUTSCENE");
+			}
+			startCountdown();
 	}
 
 	var dialogueCount:Int = 0;
@@ -967,8 +971,25 @@ class PlayState extends MusicBeatState
 		Paths.sound('introGo' + introSoundsSuffix);
 	}
 
+	var didDialogue:Bool = false;
 	public function startCountdown()
 	{
+		var s:String = StringTools.replace(songName.toLowerCase(), " ", "-");
+		var sPath:String = "assets/shared/data/" + s + "/dialogue.json";
+
+		var cutsceneFile:DialogueFile;
+
+		if (!didDialogue) {
+			if (FileSystem.exists(sPath)) {
+				startDialogue(DialogueBoxPsych.parseDialogue(Paths.json(songName + '/dialogue')));
+				didDialogue = true;
+				return false;
+			}
+			else {
+				didDialogue = true;
+			}
+		}
+
 		if(startedCountdown) {
 			callOnScripts('onStartCountdown');
 			return false;
