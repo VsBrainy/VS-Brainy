@@ -1,7 +1,11 @@
 package states;
 
 import lime.app.Future;
+#if !html5
 import sys.thread.FixedThreadPool;
+import sys.thread.Thread;
+import sys.thread.Mutex;
+#end
 import haxe.Json;
 import lime.utils.Assets;
 import openfl.display.BitmapData;
@@ -16,9 +20,6 @@ import flash.media.Sound;
 import backend.Song;
 import backend.StageData;
 import objects.Character;
-
-import sys.thread.Thread;
-import sys.thread.Mutex;
 
 import objects.Note;
 import objects.NoteSplash;
@@ -43,8 +44,10 @@ class LoadingState extends MusicBeatState
 
 	static var originalBitmapKeys:Map<String, String> = [];
 	static var requestedBitmaps:Map<String, BitmapData> = [];
+	#if !html5
 	static var mutex:Mutex;
 	static var threadPool:FixedThreadPool = null;
+	#end
 
 	function new(target:FlxState, stopMusic:Bool)
 	{
@@ -416,7 +419,9 @@ class LoadingState extends MusicBeatState
 		#else
 		var threadCount:Int = 1;
 		#end
+		#if !html5
 		threadPool = new FixedThreadPool(threadCount);
+		#end
 	}
 
 	public static function prepareToSong()
@@ -659,7 +664,9 @@ class LoadingState extends MusicBeatState
 
 	public static function startThreads()
 	{
+		#if !html5
 		mutex = new Mutex();
+		#end
 		loadMax = imagesToPrepare.length + soundsToPrepare.length + musicToPrepare.length + songsToPrepare.length;
 		loaded = 0;
 

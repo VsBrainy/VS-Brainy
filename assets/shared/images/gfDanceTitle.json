@@ -1,11 +1,11 @@
 {	
-	"titlex": -150,
-	"titley": -150,
+	"titlex": -200,
+	"titley": -200,
 	"startx": 100,
 	"starty": 576,
 	"gfx": 512,
 	"gfy": 40,
-	"backgroundSprite": "",
+	"backgroundSprite": "menuBGBlue",
 	"bpm": 180,
 	
 	"animation": "gfDance",
