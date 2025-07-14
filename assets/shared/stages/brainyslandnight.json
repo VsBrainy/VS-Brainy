@@ -1,0 +1,130 @@
+{
+	"camera_boyfriend": [
+		-150,
+		0
+	],
+	"preload": {
+		"images/brainysland/": 3
+	},
+	"_editorMeta": {
+		"boyfriend": "bf",
+		"gf": "gf",
+		"dad": "brainy"
+	},
+	"girlfriend": [
+		400,
+		130
+	],
+	"boyfriend": [
+		770,
+		100
+	],
+	"stageUI": "normal",
+	"camera_girlfriend": [
+		0,
+		0
+	],
+	"defaultZoom": 0.7,
+	"objects": [
+		{
+			"x": -280,
+			"y": -180,
+			"scale": [
+				1900,
+				1250
+			],
+			"filters": 3,
+			"color": "3f0080",
+			"angle": 0,
+			"name": "sprite2",
+			"scroll": [
+				0,
+				0
+			],
+			"alpha": 1,
+			"type": "square"
+		},
+		{
+			"x": -1422,
+			"y": -301,
+			"scale": [
+				0.8,
+				0.8
+			],
+			"image": "brainysland/hills",
+			"flipX": false,
+			"filters": 3,
+			"color": "FFFFFF",
+			"angle": 0,
+			"name": "sprite1",
+			"antialiasing": false,
+			"flipY": false,
+			"scroll": [
+				0.15,
+				0.15
+			],
+			"alpha": 1,
+			"type": "sprite"
+		},
+		{
+			"x": -1042,
+			"y": 239,
+			"scale": [
+				1,
+				1
+			],
+			"image": "brainysland/land",
+			"flipX": false,
+			"filters": 3,
+			"color": "FFFFFF",
+			"angle": 0,
+			"name": "land",
+			"antialiasing": false,
+			"flipY": false,
+			"scroll": [
+				1,
+				1
+			],
+			"alpha": 1,
+			"type": "sprite"
+		},
+		{
+			"type": "gf"
+		},
+		{
+			"type": "dad"
+		},
+		{
+			"type": "boyfriend"
+		},
+		{
+			"x": -280,
+			"y": -160,
+			"scale": [
+				1850,
+				1250
+			],
+			"filters": 3,
+			"color": "3f0080",
+			"angle": 0,
+			"name": "fg",
+			"scroll": [
+				0,
+				0
+			],
+			"alpha": 0.4,
+			"type": "square"
+		}
+	],
+	"opponent": [
+		40,
+		-260
+	],
+	"directory": "",
+	"camera_speed": 1,
+	"camera_opponent": [
+		200,
+		0
+	],
+	"hide_girlfriend": false
+}

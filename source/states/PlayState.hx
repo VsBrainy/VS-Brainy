@@ -18,6 +18,7 @@ import lime.utils.Assets;
 import openfl.utils.Assets as OpenFlAssets;
 import openfl.events.KeyboardEvent;
 import haxe.Json;
+import flixel.FlxG;
 
 import cutscenes.DialogueBoxPsych;
 
@@ -25,6 +26,7 @@ import states.StoryMenuState;
 import states.FreeplayState;
 import states.editors.ChartingState;
 import states.editors.CharacterEditorState;
+import states.MainMenuState;
 
 import substates.PauseSubState;
 import substates.GameOverSubstate;
@@ -77,16 +79,16 @@ class PlayState extends MusicBeatState
 	public static var STRUM_X_MIDDLESCROLL = -278;
 
 	public static var ratingStuff:Array<Dynamic> = [
-		['You Suck!', 0.2], //From 0% to 19%
-		['Shit', 0.4], //From 20% to 39%
+		['You Suck!', 0.19], //From 0% to 19%
+		['Shit', 0.40], //From 20% to 39%
 		['Bad', 0.5], //From 40% to 49%
 		['Bruh', 0.6], //From 50% to 59%
 		['Meh', 0.69], //From 60% to 68%
 		['Nice', 0.7], //69%
 		['Good', 0.8], //From 70% to 79%
 		['Great', 0.9], //From 80% to 89%
-		['Sick!', 1], //From 90% to 99%
-		['Perfect!!', 1] //The value on this one isn't used actually, since Perfect is always "1"
+		['Sick!', 0.99], //From 90% to 98%
+		['Perfect!!', 1] //Made it actually used lol!
 	];
 
 	//event variables
@@ -111,6 +113,8 @@ class PlayState extends MusicBeatState
 	public var songSpeed(default, set):Float = 1;
 	public var songSpeedType:String = "multiplicative";
 	public var noteKillOffset:Float = 350;
+
+	public var bpmMod:Int = 0;
 
 	public var playbackRate(default, set):Float = 1;
 
@@ -286,6 +290,7 @@ class PlayState extends MusicBeatState
 
 		PauseSubState.songName = null; //Reset to default
 		playbackRate = ClientPrefs.getGameplaySetting('songspeed');
+		bpmMod = ClientPrefs.getGameplaySetting('bpmmod');
 
 		keysArray = [
 			'note_left',
@@ -640,6 +645,15 @@ class PlayState extends MusicBeatState
 		cachePopUpScore();
 
 		if(eventNotes.length < 1) checkEventNote();
+	}
+
+	function hey():Void
+	{
+		FlxG.sound.play(Paths.sound("hey"));
+		if(boyfriend.hasAnimation('hey'))
+			boyfriend.playAnim("hey");
+		else
+			boyfriend.playAnim("singUP");
 	}
 
 	function set_songSpeed(value:Float):Float
@@ -1286,7 +1300,7 @@ class PlayState extends MusicBeatState
 
 		var songData = SONG;
 		Conductor.bpm = songData.bpm;
-
+		Conductor.bpm += bpmMod;
 		curSong = songData.song;
 
 		vocals = new FlxSound();
@@ -1848,6 +1862,10 @@ class PlayState extends MusicBeatState
 						});
 					}
 				}
+
+				if (ClientPrefs.data.taunt)
+					if (controls.TAUNT)
+						hey();
 			}
 			checkEventNote();
 		}
@@ -2461,7 +2479,7 @@ class PlayState extends MusicBeatState
 					#if DISCORD_ALLOWED DiscordClient.resetClientID(); #end
 
 					canResync = false;
-					MusicBeatState.switchState(new StoryMenuState());
+					MusicBeatState.switchState(new MainMenuState());
 
 					// if ()
 					if(!ClientPrefs.getGameplaySetting('practice') && !ClientPrefs.getGameplaySetting('botplay')) {

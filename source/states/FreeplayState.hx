@@ -505,6 +505,8 @@ class FreeplayState extends MusicBeatState
 		else
 			diffText.text = displayDiff.toUpperCase();
 
+		diffText.text = "";
+
 		positionHighscore();
 		missingText.visible = false;
 		missingTextBG.visible = false;

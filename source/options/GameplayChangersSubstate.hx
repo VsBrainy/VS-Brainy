@@ -42,8 +42,8 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		#if FLX_PITCH
 		var option:GameplayOption = new GameplayOption('Playback Rate', 'songspeed', FLOAT, 1);
 		option.scrollSpeed = 1;
-		option.minValue = 0.5;
-		option.maxValue = 3.0;
+		option.minValue = 0.1;
+		option.maxValue = 10;
 		option.changeValue = 0.05;
 		option.displayFormat = '%vX';
 		option.decimals = 2;
@@ -64,6 +64,14 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		option.maxValue = 5;
 		option.changeValue = 0.1;
 		option.displayFormat = '%vX';
+		optionsArray.push(option);
+
+		var option:GameplayOption = new GameplayOption('BPM Modifier', 'bpmmod', INT, 0);
+		option.scrollSpeed = 1;
+		option.minValue = -100;
+		option.maxValue = 100;
+		option.changeValue = 1;
+		option.displayFormat = '%v';
 		optionsArray.push(option);
 
 		optionsArray.push(new GameplayOption('Instakill on Miss', 'instakill', BOOL, false));
@@ -138,6 +146,8 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		changeSelection();
 		reloadCheckboxes();
 	}
+
+	
 
 	var nextAccept:Int = 5;
 	var holdTime:Float = 0;

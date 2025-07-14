@@ -8,6 +8,7 @@ import states.TitleState;
 
 // Add a variable here and it will get automatically saved
 @:structInit class SaveVariables {
+	public var taunt:Bool = true;
 	public var downScroll:Bool = false;
 	public var middleScroll:Bool = false;
 	public var opponentStrums:Bool = true;
@@ -64,7 +65,8 @@ import states.TitleState;
 		'instakill' => false,
 		'practice' => false,
 		'botplay' => false,
-		'opponentplay' => false
+		'opponentplay' => false,
+		'bpmmod' => 0
 	];
 
 	public var comboOffset:Array<Int> = [0, 0, 0, 0];
@@ -90,6 +92,8 @@ class ClientPrefs {
 		'note_left'		=> [A, LEFT],
 		'note_down'		=> [S, DOWN],
 		'note_right'	=> [D, RIGHT],
+		
+		'taunt'			=> [SPACE],
 		
 		'ui_up'			=> [W, UP],
 		'ui_left'		=> [A, LEFT],

@@ -1,0 +1,52 @@
+{
+	"storyName": "BRAINY'S Fun rap battle",
+	"difficulties": "Normal",
+	"hideFreeplay": false,
+	"weekBackground": "",
+	"weekBefore": "week1",
+	"startUnlocked": true,
+	"weekCharacters": [
+		"",
+		"",
+		""
+	],
+	"hideStoryMode": true,
+	"songs": [
+		[
+			"Old Brainy",
+			"brainy",
+			[
+				186,
+				113,
+				0
+			],
+			"Oldest Brainy",
+			"brainy",
+			[
+				186,
+				113,
+				0
+			]
+		],
+		[
+			"Old Irritated",
+			"brainy",
+			[
+				186,
+				113,
+				0
+			]
+		],
+		[
+			"Oldest Brainy",
+			"brainy",
+			[
+				0,
+				0,
+				0
+			]
+		]
+	],
+	"weekName": "Extras",
+	"hiddenUntilUnlocked": false
+}
