@@ -30,6 +30,9 @@ typedef SwagSong =
 
 	@:optional var arrowSkin:String;
 	@:optional var splashSkin:String;
+
+	@:optional var bfAnimOnGo:String;
+	@:optional var gfAnimOnGo:String;
 }
 
 typedef SwagSection =
@@ -142,7 +145,7 @@ class Song
 		var rawData:String = null;
 		
 		var formattedFolder:String = Paths.formatToSongPath(folder);
-		var formattedSong:String = Paths.formatToSongPath(jsonInput);
+		var formattedSong:String = 'chart';
 		_lastPath = Paths.json('$formattedFolder/$formattedSong');
 
 		#if MODS_ALLOWED

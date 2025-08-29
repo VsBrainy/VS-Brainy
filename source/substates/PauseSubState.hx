@@ -10,7 +10,7 @@ import states.StoryMenuState;
 import states.FreeplayState;
 import options.OptionsState;
 import states.MainMenuState;
-
+import states.CharacterSelectState;
 class PauseSubState extends MusicBeatSubstate
 {
 	var grpMenuShit:FlxTypedGroup<Alphabet>;
@@ -269,6 +269,8 @@ class PauseSubState extends MusicBeatSubstate
 				case "Leave Charting Mode":
 					restartSong();
 					PlayState.chartingMode = false;
+				case 'Character Select':
+					MusicBeatState.switchState(new CharacterSelectState());
 				case 'Skip Time':
 					if(curTime < Conductor.songPosition)
 					{

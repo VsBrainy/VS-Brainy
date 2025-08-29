@@ -1,53 +1,53 @@
 {
 	"animations": [
 		{
-			"loop": false,
 			"offsets": [0, 0],
+			"loop": false,
+			"fps": 24,
 			"anim": "idle",
-			"fps": 24,
-			"name": "angry idle",
-			"indices": []
+			"indices": [],
+			"name": "angry idle"
 		},
 		{
-			"loop": false,
 			"offsets": [140, -30],
+			"loop": false,
+			"fps": 24,
 			"anim": "singLEFT",
-			"fps": 24,
-			"name": "angry left",
-			"indices": []
+			"indices": [],
+			"name": "angry left"
 		},
 		{
-			"loop": false,
 			"offsets": [0, -40],
+			"loop": false,
+			"fps": 24,
 			"anim": "singDOWN",
-			"fps": 24,
-			"name": "angry down",
-			"indices": []
+			"indices": [],
+			"name": "angry down"
 		},
 		{
-			"loop": false,
 			"offsets": [0, 20],
-			"anim": "singUP",
+			"loop": false,
 			"fps": 24,
-			"name": "angry up",
-			"indices": []
+			"anim": "singUP",
+			"indices": [],
+			"name": "angry up"
 		},
 		{
-			"loop": false,
 			"offsets": [-180, 0],
-			"anim": "singRIGHT",
+			"loop": false,
 			"fps": 24,
-			"name": "angry right",
-			"indices": []
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "angry right"
 		}
 	],
 	"vocals_file": "",
 	"no_antialiasing": true,
 	"image": "characters/Angry-Brainy",
 	"position": [-80, 290],
-	"healthicon": "brainy",
+	"healthicon": "brainy-mad",
 	"flip_x": false,
-	"healthbar_colors": [255, 177, 0],
+	"healthbar_colors": [255, 198, 0],
 	"camera_position": [40, 0],
 	"sing_duration": 4,
 	"scale": 1,

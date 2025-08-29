@@ -1,0 +1,45 @@
+{
+	"songs": [
+		[
+			"Landscape",
+			"skid03",
+			[
+				255,
+				255,
+				0
+			]
+		],
+		[
+			"shoot em",
+			"skid03",
+			[
+				255,
+				255,
+				0
+			]
+		],
+		[
+			"rage03",
+			"skid03",
+			[
+				255,
+				255,
+				0
+			]
+		]
+	],
+	"hiddenUntilUnlocked": false,
+	"hideFreeplay": false,
+	"weekBackground": "stage",
+	"difficulties": "",
+	"weekCharacters": [
+		"",
+		"",
+		""
+	],
+	"storyName": "SKid03's fun rainbow land",
+	"weekName": "skid03",
+	"hideStoryMode": false,
+	"weekBefore": "tutorial",
+	"startUnlocked": true
+}

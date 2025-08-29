@@ -42,6 +42,7 @@ import objects.Note.EventNote;
 import objects.*;
 import states.stages.*;
 import states.stages.objects.*;
+import states.stages.overlays.*;
 
 #if LUA_ALLOWED
 import psychlua.*;
@@ -384,16 +385,8 @@ class PlayState extends MusicBeatState
 		switch (curStage)
 		{
 			case 'stage': new StageWeek1(); 			//Week 1
-			case 'spooky': new Spooky();				//Week 2
-			case 'philly': new Philly();				//Week 3
-			case 'limo': new Limo();					//Week 4
-			case 'mall': new Mall();					//Week 5 - Cocoa, Eggnog
-			case 'mallEvil': new MallEvil();			//Week 5 - Winter Horrorland
-			case 'school': new School();				//Week 6 - Senpai, Roses
-			case 'schoolEvil': new SchoolEvil();		//Week 6 - Thorns
-			case 'tank': new Tank();					//Week 7 - Ugh, Guns, Stress
-			case 'phillyStreets': new PhillyStreets(); 	//Weekend 1 - Darnell, Lit Up, 2Hot
-			case 'phillyBlazin': new PhillyBlazin();	//Weekend 1 - Blazin
+			case 'brainysland', 'brainyslandsunset', 'brainyslandnight': new Brainy();
+			case 'skidsland': new SkidLand();
 		}
 		if(isPixelStage) introSoundsSuffix = '-pixel';
 
@@ -432,6 +425,15 @@ class PlayState extends MusicBeatState
 			add(gfGroup);
 			add(dadGroup);
 			add(boyfriendGroup);
+		}
+
+		//This switch/case is only for overlays!
+		//okay this was really stupid but i feel too lazy to change it.
+
+		switch(curStage)
+		{
+			case 'brainysland': new BrainyOver();
+			case 'brainyslandnight': new BrainyOver();
 		}
 		
 		#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
@@ -1062,6 +1064,18 @@ class PlayState extends MusicBeatState
 						FlxG.sound.play(Paths.sound('intro1' + introSoundsSuffix), 0.6);
 						tick = ONE;
 					case 3:
+						if (SONG.bfAnimOnGo == null)
+							boyfriend.playAnim("hey", true);
+
+						else
+							boyfriend.playAnim(SONG.bfAnimOnGo, true);
+
+						if (SONG.gfAnimOnGo == null)
+							gf.playAnim("cheer", true);
+
+						else
+							gf.playAnim(SONG.gfAnimOnGo, true);
+						
 						countdownGo = createCountdownSprite(introAlts[2], antialias);
 						FlxG.sound.play(Paths.sound('introGo' + introSoundsSuffix), 0.6);
 						tick = GO;
@@ -2337,6 +2351,65 @@ class PlayState extends MusicBeatState
 			case 'Play Sound':
 				if(flValue2 == null) flValue2 = 1;
 				FlxG.sound.play(Paths.sound(value1), flValue2);
+
+			case 'Set Camera Zoom':
+				if(flValue1 == null)
+				{
+					var stageData:StageFile = StageData.getStageFile(curStage);
+					defaultCamZoom = stageData.defaultZoom;
+				}
+				else
+					defaultCamZoom = flValue1;
+
+			case 'Set Camera Offsets':
+				var char:Character = dad;
+
+				switch (value1.toLowerCase())
+				{
+					case 'bf', 'boyfriend':
+						char = boyfriend;
+					case 'gf', 'girlfriend':
+						char = gf;
+				}
+
+				var splitValues:Array<String> = value2.split(",");
+
+				var i:Int = 0;
+
+				var flValues:Array<Float> = [0, 0];
+
+				if (splitValues.length != 2) 
+				{
+					for (value in splitValues)
+					{
+						flValues[i] = Std.parseFloat(value.trim());
+						i ++;
+					}
+				}
+
+				char.cameraPosition = flValues;
+
+				switch (value1.toLowerCase())
+				{
+					case 'bf', 'boyfriend':
+						boyfriend = char;
+					case 'gf', 'girlfriend':
+						gf = char;
+
+					case 'dad':
+						char = dad;
+				}
+			case 'Set Camera Target':
+				switch (value1.toLowerCase())
+				{
+					case 'bf', 'boyfriend':
+						moveCamera(false);
+					case 'gf', 'girlfriend':
+						if (gf != null) moveCameraToGirlfriend();
+
+					case 'dad':
+						moveCamera(true);
+				}
 		}
 
 		stagesFunc(function(stage:BaseStage) stage.eventCalled(eventName, value1, value2, flValue1, flValue2, strumTime));

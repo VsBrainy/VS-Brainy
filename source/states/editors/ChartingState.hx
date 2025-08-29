@@ -70,14 +70,10 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 	public static final defaultEvents:Array<Array<String>> =
 	[
 		['', "Nothing. Yep, that's right."], //Always leave this one empty pls
-		['Dadbattle Spotlight', "Used in Dad Battle,\nValue 1: 0/1 = ON/OFF,\n2 = Target Dad\n3 = Target BF"],
 		['Hey!', "Plays the \"Hey!\" animation from Bopeebo,\nValue 1: BF = Only Boyfriend, GF = Only Girlfriend,\nSomething else = Both.\nValue 2: Custom animation duration,\nleave it blank for 0.6s"],
 		['Set GF Speed', "Sets GF head bopping speed,\nValue 1: 1 = Normal speed,\n2 = 1/2 speed, 4 = 1/4 speed etc.\nUsed on Fresh during the beatbox parts.\n\nWarning: Value must be integer!"],
 		['Philly Glow', "Exclusive to Week 3\nValue 1: 0/1/2 = OFF/ON/Reset Gradient\n \nNo, i won't add it to other weeks."],
-		['Kill Henchmen', "For Mom's songs, don't use this please, i love them :("],
 		['Add Camera Zoom', "Used on MILF on that one \"hard\" part\nValue 1: Camera zoom add (Default: 0.015)\nValue 2: UI zoom add (Default: 0.03)\nLeave the values blank if you want to use Default."],
-		['BG Freaks Expression', "Should be used only in \"school\" Stage!"],
-		['Trigger BG Ghouls', "Should be used only in \"schoolEvil\" Stage!"],
 		['Play Animation', "Plays an animation on a Character,\nonce the animation is completed,\nthe animation changes to Idle\n\nValue 1: Animation to play.\nValue 2: Character (Dad, BF, GF)"],
 		['Camera Follow Pos', "Value 1: X\nValue 2: Y\n\nThe camera won't change the follow point\nafter using this, for getting it back\nto normal, leave both values blank."],
 		['Alt Idle Animation', "Sets a specified postfix after the idle animation name.\nYou can use this to trigger 'idle-alt' if you set\nValue 2 to -alt\n\nValue 1: Character to set (Dad, BF or GF)\nValue 2: New postfix (Leave it blank to disable)"],
@@ -85,7 +81,10 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		['Change Character', "Value 1: Character to change (Dad, BF, GF)\nValue 2: New character's name"],
 		['Change Scroll Speed', "Value 1: Scroll Speed Multiplier (1 is default)\nValue 2: Time it takes to change fully in seconds."],
 		['Set Property', "Value 1: Variable name\nValue 2: New value"],
-		['Play Sound', "Value 1: Sound file name\nValue 2: Volume (Default: 1), ranges from 0 to 1"]
+		['Play Sound', "Value 1: Sound file name\nValue 2: Volume (Default: 1), ranges from 0 to 1"],
+		['Set Camera Zoom', "Value 1: Zoom value\n\nLeave blank to use default stage zoom."],
+		['Set Camera Offsets', "Value 1: Target (bf/gf/dad), not case sensitive\nValue 2: New x/y values, seperated by commas.\n\nDefaults to (0, 0)\n\nTip: This won't effect anything if the camera isn't pointed at the target, so it's a good idea activate this when it's not pointed at the target."],
+		['Set Camera Target', "Value 1: Character to point to (bf, gf, dad)"]
 	];
 	
 	public static var keysArray:Array<FlxKey> = [ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT]; //Used for Vortex Editor
@@ -655,6 +654,9 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 
 		noteTextureInputText.text = PlayState.SONG.arrowSkin;
 		noteSplashesInputText.text = PlayState.SONG.splashSkin;
+
+		bfAnimInputText.text = PlayState.SONG.bfAnimOnGo;
+		gfAnimInputText.text = PlayState.SONG.gfAnimOnGo;
 	}
 	
 	var noteSelectionSine:Float = 0;
@@ -2420,6 +2422,10 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 	var noRGBCheckBox:PsychUICheckBox;
 	var noteTextureInputText:PsychUIInputText;
 	var noteSplashesInputText:PsychUIInputText;
+
+	var bfAnimInputText:PsychUIInputText;
+	var gfAnimInputText:PsychUIInputText;
+
 	function addDataTab()
 	{
 		var tab_group = mainBox.getTab('Data').menu;
@@ -2497,6 +2503,27 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 			PlayState.SONG.splashSkin = cur;
 			if(cur.trim().length < 1) PlayState.SONG.splashSkin = null;
 		}
+
+		objY -= 30;
+		objX += 140;
+
+		gfAnimInputText = new PsychUIInputText(objX, objY, 120, '');
+		gfAnimInputText.onChange = function(old:String, cur:String)
+		{
+			PlayState.SONG.gfAnimOnGo = cur;
+
+			if (cur.trim().length < 1) PlayState.SONG.gfAnimOnGo = null;
+		}
+
+		objY -= 30;
+
+		bfAnimInputText = new PsychUIInputText(objX, objY, 120, '');
+		bfAnimInputText.onChange = function(old:String, cur:String)
+		{
+			PlayState.SONG.bfAnimOnGo = cur;
+
+			if (cur.trim().length < 1) PlayState.SONG.bfAnimOnGo = null;
+		}
 	
 		tab_group.add(new FlxText(gameOverCharDropDown.x, gameOverCharDropDown.y - 15, 120, 'Game Over Character:'));
 		tab_group.add(new FlxText(gameOverSndInputText.x, gameOverSndInputText.y - 15, 180, 'Game Over Death Sound (sounds/):'));
@@ -2509,8 +2536,12 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 
 		tab_group.add(new FlxText(noteTextureInputText.x, noteTextureInputText.y - 15, 100, 'Note Texture:'));
 		tab_group.add(new FlxText(noteSplashesInputText.x, noteSplashesInputText.y - 15, 120, 'Note Splashes Texture:'));
+		tab_group.add(new FlxText(bfAnimInputText.x, bfAnimInputText.y - 15, 120, 'BF Animation on Go!'));
+		tab_group.add(new FlxText(gfAnimInputText.x, gfAnimInputText.y - 15, 120, 'GF Animation on Go!'));
 		tab_group.add(noteTextureInputText);
 		tab_group.add(noteSplashesInputText);
+		tab_group.add(gfAnimInputText);
+		tab_group.add(bfAnimInputText);
 
 		tab_group.add(gameOverCharDropDown); //lowest priority to display properly
 	}
@@ -3305,6 +3336,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		tab_group.add(new FlxText(playerDropDown.x, playerDropDown.y - 15, 80, 'Player:'));
 		tab_group.add(new FlxText(opponentDropDown.x, opponentDropDown.y - 15, 80, 'Opponent:'));
 		tab_group.add(new FlxText(girlfriendDropDown.x, girlfriendDropDown.y - 15, 80, 'Girlfriend:'));
+
 		tab_group.add(stageDropDown);
 		tab_group.add(girlfriendDropDown);
 		tab_group.add(opponentDropDown);
@@ -4599,7 +4631,7 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		}
 		else
 		{
-			var chartName:String = Paths.formatToSongPath(PlayState.SONG.song) + '.json';
+			var chartName:String = 'chart.json';
 			if(Song.chartPath != null) chartName = Song.chartPath.substr(Song.chartPath.lastIndexOf('/')).trim();
 			fileDialog.save(chartName, chartData,
 				function()

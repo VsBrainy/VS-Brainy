@@ -30,6 +30,7 @@ class GameOverSubstate extends MusicBeatSubstate
 		{
 			this.boyfriend = playStateBoyfriend;
 		}
+
 		super();
 	}
 
