@@ -22,9 +22,9 @@ class SkidLand extends BaseStage
 
         //placeholder stuff from now on
 
-        var rainbowGround:FlxSprite = new FlxSprite(0, FlxG.height - 300).makeGraphic(FlxG.width*4, FlxG.height*2);
+        var rainbowGround:BGSprite = new BGSprite('skidsland/rainbowGround', -300, 141);
+        rainbowGround.scale.set(2, 2);
         rainbowGround.scrollFactor.set(1, 1);
-        rainbowGround.screenCenter(X);
 
         add(rainbowGround);
     }

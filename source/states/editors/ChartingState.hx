@@ -1,5 +1,6 @@
-#if !html5
 package states.editors;
+
+#if !html5
 
 import flixel.FlxSubState;
 import flixel.util.FlxSave;

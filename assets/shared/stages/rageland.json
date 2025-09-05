@@ -1,0 +1,36 @@
+{
+	"camera_boyfriend": [
+		-150,
+		0
+	],
+	"_editorMeta": {
+		"boyfriend": "bf",
+		"gf": "gf",
+		"dad": "rage03"
+	},
+	"stageUI": "normal",
+	"boyfriend": [
+		770,
+		100
+	],
+	"girlfriend": [
+		400,
+		130
+	],
+	"defaultZoom": 0.6,
+	"camera_girlfriend": [
+		0,
+		0
+	],
+	"camera_speed": 1,
+	"directory": "",
+	"opponent": [
+		-300,
+		100
+	],
+	"camera_opponent": [
+		200,
+		0
+	],
+	"hide_girlfriend": false
+}

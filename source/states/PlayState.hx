@@ -27,6 +27,7 @@ import states.FreeplayState;
 import states.editors.ChartingState;
 import states.editors.CharacterEditorState;
 import states.MainMenuState;
+import states.StageViewerState;
 
 import substates.PauseSubState;
 import substates.GameOverSubstate;
@@ -387,6 +388,7 @@ class PlayState extends MusicBeatState
 			case 'stage': new StageWeek1(); 			//Week 1
 			case 'brainysland', 'brainyslandsunset', 'brainyslandnight': new Brainy();
 			case 'skidsland': new SkidLand();
+			case 'rageland': new RageLand();
 		}
 		if(isPixelStage) introSoundsSuffix = '-pixel';
 
@@ -1760,6 +1762,9 @@ class PlayState extends MusicBeatState
 				openChartEditor();
 			else if (controls.justPressed('debug_2'))
 				openCharacterEditor();
+
+			if (FlxG.keys.justPressed.NINE)
+				MusicBeatState.switchState(new StageViewerState(curStage));
 		}
 
 		if (healthBar.bounds.max != null && health > healthBar.bounds.max)
