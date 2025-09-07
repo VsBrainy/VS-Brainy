@@ -28,7 +28,18 @@
 				186,
 				113,
 				0
-			],
+			]
+		],
+		[
+			"Older Brainy",
+			"brainy",
+			[
+				186,
+				113,
+				0
+			]
+		],
+		[
 			"Oldest Brainy",
 			"brainy",
 			[
@@ -42,15 +53,6 @@
 			"brainy-mad",
 			[
 				230,
-				0,
-				0
-			]
-		],
-		[
-			"Oldest Brainy",
-			"brainy",
-			[
-				0,
 				0,
 				0
 			]

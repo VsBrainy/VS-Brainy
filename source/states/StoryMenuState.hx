@@ -177,18 +177,13 @@ class StoryMenuState extends MusicBeatState
 		txtTracklist = new FlxText(FlxG.width * 0.05, tracksSprite.y + 60, 0, "", 32);
 		txtTracklist.alignment = CENTER;
 		txtTracklist.font = Paths.font("vcr.ttf");
-		txtTracklist.color = 0xffffffff;
+		txtTracklist.color = 0xFFe55777;
 		add(txtTracklist);
 		add(scoreText);
 		add(txtWeekTitle);
 
 		changeWeek();
 		changeDifficulty();
-
-		var blackout:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
-		blackout.scrollFactor.set();
-		add(blackout);
-
 
 		super.create();
 	}
@@ -213,8 +208,6 @@ class StoryMenuState extends MusicBeatState
 			return;
 		}
 
-		
-
 		// scoreText.setFormat(Paths.font("vcr.ttf"), 32);
 		if(intendedScore != lerpScore)
 		{
@@ -229,7 +222,6 @@ class StoryMenuState extends MusicBeatState
 		if (!movedBack && !selectedWeek)
 		{
 			var changeDiff = false;
-			selectWeek();
 			if (controls.UI_UP_P)
 			{
 				changeWeek(-1);
@@ -339,6 +331,7 @@ class StoryMenuState extends MusicBeatState
 			
 			if (stopspamming == false)
 			{
+				FlxG.sound.play(Paths.sound('confirmMenu'));
 
 				grpWeekText.members[curWeek].isFlashing = true;
 				for (char in grpWeekCharacters.members)

@@ -219,6 +219,7 @@ class PlayState extends MusicBeatState
 	public var songHits:Int = 0;
 	public var songMisses:Int = 0;
 	public var scoreTxt:FlxText;
+	public var creditsTxt:FlxText;
 	var timeTxt:FlxText;
 	var scoreTxtTween:FlxTween;
 
@@ -562,6 +563,17 @@ class PlayState extends MusicBeatState
 		scoreTxt.borderSize = 1.25;
 		scoreTxt.visible = !ClientPrefs.data.hideHud;
 		uiGroup.add(scoreTxt);
+
+		if (SONG.composer == null) SONG.composer = "Brainy7890"; //just fall back to my username since i made most of the songs
+		if (SONG.charter == null) SONG.charter = "Brainy7890";
+		if (SONG.programmer == null) SONG.programmer = "Brainy7890";
+
+		creditsTxt = new FlxText(50, 0, FlxG.width, 'Composer: ${SONG.composer}\nCharter: ${SONG.charter}\nProgrammer: ${SONG.programmer}', 30);
+		creditsTxt.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		creditsTxt.scrollFactor.set();
+		creditsTxt.screenCenter(Y);
+		creditsTxt.visible = !ClientPrefs.data.hideHud;
+		uiGroup.add(creditsTxt);
 
 		botplayTxt = new FlxText(400, healthBar.y - 90, FlxG.width - 800, Language.getPhrase("Botplay").toUpperCase(), 32);
 		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -1385,6 +1397,7 @@ class PlayState extends MusicBeatState
 
 		var oldNote:Note = null;
 		var sectionsData:Array<SwagSection> = PlayState.SONG.notes;
+		var songName:String = PlayState.SONG.song;
 		var ghostNotesCaught:Int = 0;
 		var daBpm:Float = Conductor.bpm;
 	
@@ -1398,6 +1411,7 @@ class PlayState extends MusicBeatState
 				final songNotes: Array<Dynamic> = section.sectionNotes[i];
 				var spawnTime: Float = songNotes[0];
 				var noteColumn: Int = Std.int(songNotes[1] % totalColumns);
+
 				var holdLength: Float = songNotes[2];
 				var noteType: String = !Std.isOfType(songNotes[3], String) ? Note.defaultNoteTypes[songNotes[3]] : songNotes[3];
 				if (Math.isNaN(holdLength))
@@ -1425,12 +1439,21 @@ class PlayState extends MusicBeatState
 				}
 
 				var swagNote:Note = new Note(spawnTime, noteColumn, oldNote);
+
 				var isAlt: Bool = section.altAnim && !gottaHitNote;
 				swagNote.gfNote = (section.gfSection && gottaHitNote == section.mustHitSection);
 				swagNote.animSuffix = isAlt ? "-alt" : "";
 				swagNote.mustPress = gottaHitNote;
 				swagNote.sustainLength = holdLength;
 				swagNote.noteType = noteType;
+
+				/*var start:Int = 0;
+
+				if (songName.toLowerCase() == "cheating")
+				{
+					swagNote.noteData = FlxG.random.int(start, start + 3);
+				}
+				*/
 	
 				swagNote.scrollFactor.set();
 				unspawnNotes.push(swagNote);

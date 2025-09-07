@@ -33,6 +33,10 @@ typedef SwagSong =
 
 	@:optional var bfAnimOnGo:String;
 	@:optional var gfAnimOnGo:String;
+
+	@:optional var composer:String;
+	@:optional var charter:String;
+	@:optional var programmer:String;
 }
 
 typedef SwagSection =
