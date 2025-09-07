@@ -13,6 +13,15 @@
 	"hideStoryMode": true,
 	"songs": [
 		[
+			"Melody",
+			"guy",
+			[
+				255,
+				255,
+				255
+			]
+		],
+		[
 			"Cheating",
 			"brainy-mad",
 			[

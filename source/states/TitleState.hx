@@ -534,7 +534,7 @@ class TitleState extends MusicBeatState
 					FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
 					FlxG.sound.music.fadeIn(4, 0, 0.7);
 				case 2:
-					createCoolText(['Psych Engine by'], 40);
+					createCoolText(['Brainy', 'presents'], 40);
 				case 4:
 					addMoreText('Shadow Mario', 40);
 					addMoreText('Riveren', 40);

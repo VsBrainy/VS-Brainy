@@ -20,15 +20,14 @@ class WavyBGSprite extends BGSprite
         glitch.amplitude = amplitude;
         glitch.frequency = frequency;
         glitch.speed = speed;
-
-        this.shader = glitch.shader;
+        
+        if (!ClientPrefs.data.flashing || ClientPrefs.data.shaders) this.shader = glitch.shader;
     }
 
-    override public function update(elapsed:Float)
+    public function updateShader(elapsed:Float) //needs to called inside of state in update().
     {
-        if (!ClientPrefs.data.flashing && !ClientPrefs.data.shaders)
+        if (!ClientPrefs.data.flashing || ClientPrefs.data.shaders)
         {
-            super.update(elapsed);
             glitch.update(elapsed);
             this.shader = glitch.shader;
         }

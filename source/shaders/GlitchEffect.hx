@@ -34,7 +34,7 @@ class GlitchEffect {
         frequency = 5;
         speed = 2.25;
         time += elapsed;
-        shader.uTime.value = [time];
+        shader.uTime.value = [time/2];
     }
 
 	public function new()

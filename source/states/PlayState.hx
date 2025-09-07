@@ -390,6 +390,7 @@ class PlayState extends MusicBeatState
 			case 'brainysland', 'brainyslandsunset', 'brainyslandnight': new Brainy();
 			case 'skidsland': new SkidLand();
 			case 'rageland': new RageLand();
+			case 'minisynth': new MiniSynth();
 		}
 		if(isPixelStage) introSoundsSuffix = '-pixel';
 
