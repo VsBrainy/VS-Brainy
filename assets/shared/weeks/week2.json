@@ -30,8 +30,8 @@
 	],
 	"hiddenUntilUnlocked": false,
 	"hideFreeplay": false,
-	"weekBackground": "",
-	"difficulties": "",
+	"weekBackground": "skid03",
+	"difficulties": "normal",
 	"weekCharacters": [
 		"",
 		"",
