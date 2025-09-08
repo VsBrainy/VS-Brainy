@@ -28,6 +28,7 @@ import states.editors.ChartingState;
 import states.editors.CharacterEditorState;
 import states.MainMenuState;
 import states.StageViewerState;
+import states.JumpScareState;
 
 import substates.PauseSubState;
 import substates.GameOverSubstate;
@@ -391,6 +392,9 @@ class PlayState extends MusicBeatState
 			case 'skidsland': new SkidLand();
 			case 'rageland': new RageLand();
 			case 'minisynth': new MiniSynth();
+			case 'brainycheater': 
+				var stage:VoidStage = new VoidStage('cheater/brainycheater', 1, 1, 3, 3);
+				stage.bg.y += (720/2) + 200;
 		}
 		if(isPixelStage) introSoundsSuffix = '-pixel';
 
@@ -1783,7 +1787,25 @@ class PlayState extends MusicBeatState
 		if(!endingSong && !inCutscene && allowDebugKeys)
 		{
 			if (controls.justPressed('debug_1'))
-				openChartEditor();
+				switch (SONG.song.toLowerCase())
+				{
+					case 'irritated':
+						Song.loadFromJson('chart', 'cheating');
+
+						canResync = false;
+						isStoryMode = false;
+						LoadingState.prepareToSong();
+						LoadingState.loadAndSwitchState(new PlayState(), false, false);
+
+					case 'cheating':
+						health = 0;
+
+					case 'melody', 'twosome':
+						MusicBeatState.switchState(new JumpScareState());
+
+					default:
+						openChartEditor();
+				}
 			else if (controls.justPressed('debug_2'))
 				openCharacterEditor();
 
