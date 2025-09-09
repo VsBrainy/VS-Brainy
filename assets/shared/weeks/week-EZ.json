@@ -1,0 +1,50 @@
+{
+	"storyName": "This is just the start :)",
+	"difficulties": "Normal",
+	"hideFreeplay": false,
+	"weekBackground": "ez",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"weekBefore": "tutorial",
+	"startUnlocked": true,
+	"weekCharacters": [
+		"",
+		"",
+		""
+	],
+	"songs": [
+		[
+			"melody",
+			"guy",
+			[
+				255,
+				255,
+				255
+			]
+		],
+		[
+			"cords",
+			"guy",
+			[
+				255,
+				255,
+				255
+			]
+		],
+		[
+			"Intensity",
+			"angryguy",
+			[
+				80,
+				0,
+				0
+			]
+		]
+	],
+	"hideStoryMode": false,
+	"weekName": "too easy",
+	"hiddenUntilUnlocked": false
+}

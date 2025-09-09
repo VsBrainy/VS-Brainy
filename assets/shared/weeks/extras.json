@@ -13,7 +13,16 @@
 	"hideStoryMode": true,
 	"songs": [
 		[
-			"Melody",
+			"plugins",
+			"guy",
+			[
+				255,
+				255,
+				255
+			]
+		],
+		[
+			"Cords Ripoff",
 			"guy",
 			[
 				255,

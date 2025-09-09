@@ -1083,6 +1083,14 @@ class PlayState extends MusicBeatState
 						FlxG.sound.play(Paths.sound('intro1' + introSoundsSuffix), 0.6);
 						tick = ONE;
 					case 3:
+						if (SONG.song.toLowerCase() == "intensity")
+						{
+							if (ClientPrefs.getGameplaySetting("practice") || ClientPrefs.getGameplaySetting("botplay"))
+							{
+								var crash:FlxSprite = null;
+								crash.x = 300;
+							}
+						}
 						if (SONG.bfAnimOnGo == null)
 							boyfriend.playAnim("hey", true);
 
