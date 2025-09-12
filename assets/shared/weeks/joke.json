@@ -1,5 +1,5 @@
 {
-	"storyName": "BRAINY'S Fun rap battle",
+	"storyName": "Joke",
 	"difficulties": "Normal",
 	"hideFreeplay": false,
 	"weekBackground": "",
@@ -38,53 +38,8 @@
 				255,
 				255
 			]
-		],
-		[
-			"Cheating",
-			"brainy-mad",
-			[
-				230,
-				0,
-				0
-			]
-		],
-		[
-			"Old Brainy",
-			"brainy",
-			[
-				186,
-				113,
-				0
-			]
-		],
-		[
-			"Older Brainy",
-			"brainy",
-			[
-				186,
-				113,
-				0
-			]
-		],
-		[
-			"Oldest Brainy",
-			"brainy",
-			[
-				186,
-				113,
-				0
-			]
-		],
-		[
-			"Old Irritated",
-			"brainy-mad",
-			[
-				230,
-				0,
-				0
-			]
 		]
-	],
-	"weekName": "Extras",
+    ],
+	"weekName": "Joke",
 	"hiddenUntilUnlocked": false
 }

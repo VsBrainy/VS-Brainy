@@ -31,6 +31,8 @@ import lime.graphics.Image;
 import backend.ALSoftConfig; // Just to make sure DCE doesn't remove this, since it's not directly referenced anywhere else.
 #end
 
+import backend.Globals;
+
 //crash handler stuff
 #if CRASH_HANDLER
 import openfl.events.UncaughtErrorEvent;
@@ -170,6 +172,12 @@ class Main extends Sprite
 		var icon = Image.fromFile("icon.png");
 		Lib.current.stage.window.setIcon(icon);
 		#end
+
+		if (Math.random() < 0.5)
+		{
+			Lib.current.stage.window.title = "Friday Night Funkin': Vs Brainy and MiniSynth";
+			Globals.minisynth = true;
+		}
 
 		#if html5
 		FlxG.autoPause = false;

@@ -60,6 +60,9 @@ import crowplexus.hscript.Expr.Error as IrisError;
 import crowplexus.hscript.Printer;
 #end
 
+import lime.app.Application;
+import Sys;
+
 /**
  * This is where all the Gameplay stuff happens and is managed
  *
@@ -1083,14 +1086,16 @@ class PlayState extends MusicBeatState
 						FlxG.sound.play(Paths.sound('intro1' + introSoundsSuffix), 0.6);
 						tick = ONE;
 					case 3:
+						#if !debug
 						if (SONG.song.toLowerCase() == "intensity")
 						{
 							if (ClientPrefs.getGameplaySetting("practice") || ClientPrefs.getGameplaySetting("botplay"))
 							{
-								var crash:FlxSprite = null;
-								crash.x = 300;
+								Application.current.window.alert("A critical unknown error has occurred. The program will now exit.", "ERROR!");
+								Sys.exit(0);
 							}
 						}
+						#end
 						if (SONG.bfAnimOnGo == null)
 							boyfriend.playAnim("hey", true);
 
@@ -1460,13 +1465,12 @@ class PlayState extends MusicBeatState
 				swagNote.sustainLength = holdLength;
 				swagNote.noteType = noteType;
 
-				/*var start:Int = 0;
+				var start:Int = 0;
 
 				if (songName.toLowerCase() == "cheating")
 				{
 					swagNote.noteData = FlxG.random.int(start, start + 3);
 				}
-				*/
 	
 				swagNote.scrollFactor.set();
 				unspawnNotes.push(swagNote);

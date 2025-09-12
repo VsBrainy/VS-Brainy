@@ -46,7 +46,8 @@ class Note extends FlxSprite
 		'Hey!',
 		'Hurt Note',
 		'GF Sing',
-		'No Animation'
+		'No Animation',
+		'Instakill'
 	];
 
 	public var extraData:Map<String, Dynamic> = new Map<String, Dynamic>();
@@ -148,6 +149,8 @@ class Note extends FlxSprite
 	}
 	public var hitsound:String = 'hitsound';
 
+	public var callback = () -> null;
+
 	private function set_multSpeed(value:Float):Float {
 		resizeByRatio(value / multSpeed);
 		multSpeed = value;
@@ -225,6 +228,20 @@ class Note extends FlxSprite
 					noMissAnimation = true;
 				case 'GF Sing':
 					gfNote = true;
+				case 'Instakill':
+					rgbShader.r = 0xFFFF0000;
+					rgbShader.g = 0xFFFF0000;
+					rgbShader.b = 0xFFFF0E42;
+
+					// splash data and colors
+					noteSplashData.r = 0xFFFF0000;
+					noteSplashData.g = 0xFFFF0000;
+					noteSplashData.texture = 'noteSplashes/noteSplashes-electric';
+					hitCausesMiss = true;
+					missHealth = 2;
+					hitsound = 'cancelMenu';
+					hitsoundChartEditor = false;
+					lowPriority = true;
 			}
 			if (value != null && value.length > 1) NoteTypesConfig.applyNoteTypeData(this, value);
 			if (hitsound != 'hitsound' && hitsoundVolume > 0) Paths.sound(hitsound); //precache new sound for being idiot-proof

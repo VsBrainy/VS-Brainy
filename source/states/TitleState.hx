@@ -21,6 +21,7 @@ import states.MainMenuState;
 import debug.FPSCounter;
 import backend.ClientPrefs;
 
+import backend.Globals;
 typedef TitleData =
 {
 	var titlex:Float;
@@ -534,10 +535,10 @@ class TitleState extends MusicBeatState
 					FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
 					FlxG.sound.music.fadeIn(4, 0, 0.7);
 				case 2:
-					createCoolText(['Brainy', 'presents'], 40);
+					createCoolText(['A mod by'], 40);
 				case 4:
-					addMoreText('Shadow Mario', 40);
-					addMoreText('Riveren', 40);
+					addMoreText('Brainy7890', 40);
+					addMoreText(':)', 40);
 				case 5:
 					deleteCoolText();
 				case 6:
@@ -555,11 +556,13 @@ class TitleState extends MusicBeatState
 				case 13:
 					deleteCoolText();
 				case 14:
-					addMoreText('Friday');
+					addMoreText('VS Brainy7890');
 				case 15:
-					addMoreText('Night');
+					addMoreText('and');
 				case 16:
-					addMoreText('Funkin'); // credTextShit.text += '\nFunkin';
+					var string:String = "SKiD03";
+					if (Globals.minisynth) string = "MiniSynth";
+					addMoreText(string); // credTextShit.text += '\nFunkin';
 
 				case 17:
 					skipIntro();

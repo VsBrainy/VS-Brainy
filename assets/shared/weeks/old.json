@@ -1,0 +1,27 @@
+{
+	"storyName": "Old Song",
+	"difficulties": "Normal",
+	"hideFreeplay": false,
+	"weekBackground": "",
+	"weekBefore": "week1",
+	"startUnlocked": true,
+	"weekCharacters": [
+		"",
+		"",
+		""
+	],
+	"hideStoryMode": true,
+	"songs": [
+		[
+			"Cheating",
+			"brainy-mad",
+			[
+				230,
+				0,
+				0
+			]
+		]
+    ],
+	"weekName": "Old",
+	"hiddenUntilUnlocked": false
+}
